@@ -14,7 +14,7 @@ namespace SignalR
         public static void Start()
         {
             DynamicModuleUtility.RegisterModule(typeof(HubModule));
-
+            
             TransportManager.Register("longPolling", context => new LongPollingTransport(context, DependencyResolver.Resolve<IJsonSerializer>()));
             TransportManager.Register("forever", context => new ForeverTransport(context, DependencyResolver.Resolve<IJsonSerializer>()));
         }

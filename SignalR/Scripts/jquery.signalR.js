@@ -296,16 +296,17 @@
 
                         var messageId = instance.messageId,
                             connect = (messageId === null),
-                            url = instance.url + (connect ? "/connect" : "");
+                            qs = "?transport=longPolling&clientId=" + instance.clientId + "&messageId=" + messageId,
+                            url = instance.url + (connect ? "/connect" : "") + qs;
 
                         instance.pollXhr = $.ajax(url, {
                             global: false,
                             type: "POST",
                             data: {
-                                clientId: instance.clientId,
-                                messageId: messageId,
+                                //clientId: instance.clientId,
+                                //messageId: messageId,
                                 connectionData: instance.data,
-                                transport: "longPolling",
+                                //transport: "longPolling",
                                 groups: (instance.groups || []).toString()
                             },
                             dataType: "json",

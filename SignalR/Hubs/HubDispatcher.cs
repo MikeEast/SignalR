@@ -227,7 +227,11 @@ namespace SignalR.Hubs
 
         protected override IConnection CreateConnection(string clientId, IEnumerable<string> groups, HttpContextBase context)
         {
-            string data = context.Request["connectionData"];
+            string data = context.Request.Form["connectionData"];
+            if (String.IsNullOrEmpty(data))
+            {
+                data = context.Request.QueryString["connectionData"];
+            }
 
             if (String.IsNullOrEmpty(data))
             {

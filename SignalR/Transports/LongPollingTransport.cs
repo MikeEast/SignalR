@@ -58,7 +58,7 @@ namespace SignalR.Transports
             get
             {
                 long messageId;
-                if (Int64.TryParse(_context.Request["messageId"], out messageId))
+                if (Int64.TryParse(_context.Request.QueryString["messageId"], out messageId))
                 {
                     return messageId;
                 }
@@ -70,7 +70,7 @@ namespace SignalR.Transports
         {
             get
             {
-                return _context.Request["clientId"];
+                return _context.Request.QueryString["clientId"];
             }
         }
 

@@ -15,6 +15,7 @@ namespace SignalR.Client.Transports
     {
         private HttpWebRequest _pollingRequest;
         private readonly object _lockObj = new object();
+        private const string _qs = "?transport=longPolling&clientId={0}&messageId={1}";
 
         public void Start(Connection connection, string data)
         {
@@ -25,11 +26,14 @@ namespace SignalR.Client.Transports
                 url += "connect";
             }
 
+            var qs = String.Format(_qs, connection.ClientId, connection.MessageId);
+            url += qs;
+
             var parameters = new Dictionary<string, string> {
                 { "connectionData", data },
-                { "messageId", Convert.ToString(connection.MessageId) },
-                { "clientId", connection.ClientId },
-                { "transport", "longPolling" },
+                //{ "messageId", Convert.ToString(connection.MessageId) },
+                //{ "clientId", connection.ClientId },
+                //{ "transport", "longPolling" },
                 { "groups", String.Join(",", connection.Groups.ToArray()) }
             };
 

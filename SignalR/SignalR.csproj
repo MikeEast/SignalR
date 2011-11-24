@@ -37,6 +37,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -90,6 +93,7 @@
     <Compile Include="ISignalBus.cs" />
     <Compile Include="JavaScriptSerializerAdapter.cs" />
     <Compile Include="Json.cs" />
+    <Compile Include="JsonNetAdapter.cs" />
     <Compile Include="Routing\IncomingOnlyRouteConstraint.cs" />
     <Compile Include="Routing\PersistentRouteHandler.cs" />
     <Compile Include="Routing\RouteExtensions.cs" />

@@ -21,7 +21,11 @@ namespace SignalR.Transports
 
         internal static ITransport GetTransport(HttpContextBase contextBase)
         {
-            string transportName = contextBase.Request["transport"];
+            string transportName = contextBase.Request.QueryString["transport"];
+            if (String.IsNullOrEmpty(transportName))
+            {
+                transportName = contextBase.Request.Form["transport"];
+            }
 
             if (String.IsNullOrEmpty(transportName))
             {

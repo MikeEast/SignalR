@@ -85,7 +85,11 @@ namespace SignalR
             {
                 _transport = GetTransport(contextBase);
 
-                string clientId = contextBase.Request["clientId"];
+                string clientId = contextBase.Request.QueryString["clientId"];
+                if (String.IsNullOrEmpty(clientId))
+                {
+                    clientId = contextBase.Request.Form["clientId"];
+                }
 
                 // If there's no client id then this is a bad request
                 if (String.IsNullOrEmpty(clientId))
@@ -135,8 +139,6 @@ namespace SignalR
 
         protected virtual IConnection CreateConnection(string clientId, IEnumerable<string> groups, HttpContextBase context)
         {
-            string groupValue = context.Request["groups"] ?? String.Empty;
-
             // The list of default signals this connection cares about:
             // 1. The default signal (the type name)
             // 2. The client id (so we can message this particular connection)
@@ -235,7 +237,11 @@ namespace SignalR
 
         private IEnumerable<string> GetGroups(HttpContextBase context)
         {
-            string groupValue = context.Request["groups"];
+            string groupValue = context.Request.Form["groups"];
+            if (String.IsNullOrEmpty(groupValue))
+            {
+                groupValue = context.Request.QueryString["groups"];
+            }
 
             if (String.IsNullOrEmpty(groupValue))
             {

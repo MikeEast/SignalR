@@ -25,6 +25,7 @@ namespace SignalR.Infrastructure
 
         public IEnumerable<T> GetSnapshot()
         {
+            // TODO: Why not just use _items.Keys here?
             return _items.Select(x => x.Key);
         }
 
